@@ -19,14 +19,24 @@ use App\Http\Controllers\Admin\StoreController;
 //PATCH
 //OPTIONS
 
-Route::get('/store',[StoreController::class,'index']);
+Route::get('/', function () {
+    $hello = "Hello World";
+    return view('welcome', ['hello' => $hello]);
+});
 
- Route::get('/', function () {
-     $hello = "Hello World";
-     return view('welcome', ['hello' => $hello]);
- });
+Route::prefix('stores')->namespace('Admin')->name('admin.stores.')->group(function () {
 
-// Route::get('/createStore', function () {
+    Route::get('/', [StoreController::class, 'index'])->name('index');
+    Route::get('/create', [StoreController::class,'create'])->name('create');
+    Route::post('/viewStore', [StoreController::class, 'store'])->name('store');
+    Route::get('/edit/{store}', [StoreController::class, 'edit'])->name('edit');
+    Route::post('/update/{store}', [StoreController::class, 'update'])->name('update');
+    Route::get('/delete/{store}',[StoreController::class, 'delete'])->name('delete');
+
+});
+
+
+ // Route::get('/createStore', function () {
 //     //Create Store
 //     $user = App\Models\User::find(10);
 //     $store = $user->store()->create([
