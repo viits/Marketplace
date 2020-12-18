@@ -49,7 +49,7 @@ class StoreController extends Controller
         return redirect()->route('admin.stores.index');
     }
 
-    public function delete($store)
+    public function destroy($store)
     {
         $store = Store::find($store);
         $store->delete();

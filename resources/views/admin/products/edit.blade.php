@@ -4,9 +4,10 @@
 
 <h1>Atualizar  Produto</h1>
 
-<form action="{{route('admin.products.store')}}" method="post">
-    <input type="hidden" name="_token" value="{{csrf_token()}}" />
-
+<form action="{{route('admin.products.update',['product'=>$product->id])}}" method="post">
+    @csrf
+    @method("PUT")
+    
     <div class="form-group">
         <label>Nome do Produto : </label>
         <input type="text" name="name" class="form-control"  value="{{$product->name}}"/>
@@ -19,7 +20,7 @@
 
     <div class="form-group">
         <label>Conteúdo: </label>
-        <textarea name="body" id="" rows="10" class="form-control"  > {{$product->body}}</textarea>
+        <textarea name="body" id="" rows="10" class="form-control"> {{$product->body}}</textarea>
     </div>
 
 
